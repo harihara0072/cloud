@@ -1,15 +1,21 @@
 from google.cloud import storage
 import os
-import pymysql
+import MySQLdb
 
 app = Flask(__name__)
 
-connection = pymysql.connect(host='35.192.165.227',
-                             user='root',
-                             password='root',
-                             db='cloud_db')
+CLOUDSQL_CONNECTION_NAME = os.environ.get('CLOUDSQL_CONNECTION_NAME')
+CLOUDSQL_USER = os.environ.get('CLOUDSQL_USER')
+CLOUDSQL_PASSWORD = os.environ.get('CLOUDSQL_PASSWORD')
 
-print "database connected..."
+cloudsql_unix_socket = os.path.join(
+            '/cloudsql', CLOUDSQL_CONNECTION_NAME)
+
+db = MySQLdb.connect(
+            unix_socket=cloudsql_unix_socket,
+            user=CLOUDSQL_USER,
+            passwd=CLOUDSQL_PASSWORD)
+print "Database connected..."
 
 @app.route('/')
 def hello_world():
