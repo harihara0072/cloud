@@ -2,6 +2,12 @@ runtime: python27
 threadsafe: true
 entrypoint: gunicorn -b :$PORT main:app
 
+handlers:
+- url: /.*
+  script: this field is required, but ignored
+
 runtime_config:
   python_version: 2
+
+
  
