@@ -1,7 +1,7 @@
 from flask import Flask
 from google.cloud import storage
 import os
-import cloudstorage as gcs
+
 
 app = Flask(__name__)
 
@@ -23,7 +23,7 @@ def hello_world():
     response.write('<ol>')
 
     page_size = 1
-    stats = gcs.listbucket(bucket, max_keys=page_size)
+    stats = client.listbucket(bucket, max_keys=page_size)
     while True:
         count = 0
         for stat in stats:
@@ -43,7 +43,7 @@ def hello_world():
 
         if count != page_size or count == 0:
             break
-        stats = gcs.listbucket(bucket, max_keys=page_size,
+        stats = client.listbucket(bucket, max_keys=page_size,
                                marker=stat.filename)
     response.write('</ol>')
     return "Hello hari"
