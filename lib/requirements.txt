@@ -1,0 +1,3 @@
+google-api-python-client
+Flask==0.10
+Markdown==2.5.2
