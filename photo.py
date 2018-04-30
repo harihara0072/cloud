@@ -1,8 +1,15 @@
 from google.cloud import storage
 import os
+import pymysql
 
 app = Flask(__name__)
 
+connection = pymysql.connect(host='35.192.165.227',
+                             user='root',
+                             password='root',
+                             db='cloud_db')
+
+print "database connected..."
 
 @app.route('/')
 def hello_world():
