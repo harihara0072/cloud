@@ -1,5 +1,5 @@
 runtime: python27
-
+threadsafe: true
 entrypoint: gunicorn -b :$PORT main:app
 
 runtime_config:
